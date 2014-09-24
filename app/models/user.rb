@@ -4,4 +4,7 @@ class User < ActiveRecord::Base
 										uniqueness: true,
 										email: true)
 	validates :password_digest, presence: true
+
+	# authentication support
+	has_secure_password
 end
