@@ -22,5 +22,11 @@ module PrePost
 
     # For not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true
+
+      # factory girl
+      config.generators do |g|
+        g.factory_girl(dir: "#{::Rails.root}/spec/factories", 
+          suffix: 'factory') # modelname_some_suffix.rb
+      end
   end
 end

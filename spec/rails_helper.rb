@@ -50,15 +50,8 @@ RSpec.configure do |config|
   config.infer_spec_type_from_file_location!
 
 
-  # factory girl
-  config.generators do |g|
-    g.factory_girl 
-      dir: "#{::Rails.root}/spec/factories"
-      suffix: 'factory' # modelname_some_suffix.rb
-  end
-
   config.order = 'random'
-  config.includ FactoryGirl::Syntax::Methods
+  config.include FactoryGirl::Syntax::Methods
 
   config.before(:suite) do
     begin
