@@ -14,6 +14,12 @@ RSpec.describe UsersController, :type => :controller do
 			post :create, user_params
 			expect(JSON.parse(response.body)['user']['email']).to eq(user_params[:user][:email])
 		end
+
+		it 'should not create user with bad params' do
+			expect {
+				post :create, {user: { email: 'dodoAtGmailDotCom', password: '12345', password_confirmation: '' }}
+			}.to change { User.count }.by(0)
+		end
 	end
 
 end
