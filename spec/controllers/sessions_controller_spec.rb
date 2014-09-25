@@ -6,7 +6,7 @@ RSpec.describe SessionsController, :type => :controller do
 
 	context 'create' do
 		it 'has a successful response' do
-			post :create, { email: user.email, password: '12345' }
+			post :create, { email: user.email, password: '123456' }
 			expect(response).to be_success
 		end
 
@@ -16,7 +16,7 @@ RSpec.describe SessionsController, :type => :controller do
 		end
 
 		it 'sets the auth_token' do
-			post :create, { email: user.email, password: '12345' }
+			post :create, { email: user.email, password: '123456' }
 			expect(JSON.parse(response.body)['user']['auth_token']).to_not be_nil
 		end
 	end

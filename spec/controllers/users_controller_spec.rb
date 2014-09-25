@@ -31,7 +31,7 @@ RSpec.describe UsersController, :type => :controller do
 	end
 
 	context 'create' do
-		let(:user_params) { ({user: { email: 'yosi@gmail.com', password: '12345', password_confirmation: '12345', name: 'yosi' }}) }
+		let(:user_params) { ({user: { email: 'yosi@gmail.com', password: '123456', password_confirmation: '123456', name: 'yosi' }}) }
 		it 'creates a user' do
 			expect {
 				post :create, user_params

@@ -16,6 +16,9 @@ class User < ActiveRecord::Base
 										uniqueness: true,
 										email: true)
 	validates :password_digest, presence: true
+	validates :password, presence: true, 
+											 length: { within: 6..40 },
+											 allow_nil: true
 	validates :name, presence: true, 
 									 uniqueness: true, 
 									 format: { with: /\A[a-zA-Z0-9._-]+\Z/ }
