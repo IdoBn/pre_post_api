@@ -20,6 +20,11 @@ RSpec.describe UsersController, :type => :controller do
 				post :create, {user: { email: 'dodoAtGmailDotCom', password: '12345', password_confirmation: '' }}
 			}.to change { User.count }.by(0)
 		end
+
+		it 'should create an auth token' do
+			post :create, user_params
+			expect(JSON.parse(response.body)['user']['auth_token']).to_not be_nil
+		end
 	end
 
 end
