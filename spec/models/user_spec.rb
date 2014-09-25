@@ -11,6 +11,9 @@ RSpec.describe User, :type => :model do
  		it { expect(FactoryGirl.build(:user, email: 'dodoAtGmailDotCom')).to_not be_valid }
 
  		it { should have_secure_password }
+
+ 		it { should validate_presence_of(:name) }
+ 		it { should validate_uniqueness_of(:name) }
  	end
 
  	context 'associations' do

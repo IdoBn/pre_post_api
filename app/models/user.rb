@@ -16,6 +16,9 @@ class User < ActiveRecord::Base
 										uniqueness: true,
 										email: true)
 	validates :password_digest, presence: true
+	validates :name, presence: true, 
+									 uniqueness: true, 
+									 format: { with: /\A[a-zA-Z0-9._-]+\Z/ }
 
 	# authentication support
 	has_secure_password
