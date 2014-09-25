@@ -48,4 +48,13 @@ RSpec.describe FriendshipsController, :type => :controller do
     end
   end
 
+  context 'PATCH accept' do
+    it 'makes the users friends' do
+      Friendship.request(user2.id, user.id)
+      patch :accept, { friend_id: user2.id }
+
+      expect(user.friends).to include(user2)
+      expect(user2.friends).to include(user)
+    end
+  end
 end

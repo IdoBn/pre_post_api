@@ -11,7 +11,7 @@ class FriendshipsController < ApplicationController
   end
 
   def accept
-  	friendship.accept(current_user.id, params[:friend_id])
+  	Friendship.accept(current_user.id, params[:friend_id])
   	render json: { friendship: friendship }
   end
 
