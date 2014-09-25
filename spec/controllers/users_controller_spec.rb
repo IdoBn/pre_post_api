@@ -2,6 +2,20 @@ require 'rails_helper'
 
 RSpec.describe UsersController, :type => :controller do
 
+	context 'show' do
+		let(:user) { FactoryGirl.create(:user) }
+	  before(:each) do
+	    user.set_auth_token
+	    allow(controller).to receive(:authenticate_token) { true }
+	    allow(controller).to receive(:current_user) { user }
+	  end
+
+	  it 'renders user json' do
+	  	get :show, { id: user.id }
+	  	expect(JSON.parse(response.body)['user']['email']).to eq(user.email)
+	  end
+	end
+
 	context 'create' do
 		let(:user_params) { ({user: { email: 'yosi@gmail.com', password: '12345', password_confirmation: '12345' }}) }
 		it 'creates a user' do
