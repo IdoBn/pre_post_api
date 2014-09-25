@@ -9,12 +9,11 @@ class User < ActiveRecord::Base
 	has_secure_password
 
 	# callbacks
-	after_create :set_auth_token
+	before_create :set_auth_token
 
 	def set_auth_token
     begin
       self.auth_token = SecureRandom.hex
     end while self.class.exists?(auth_token: self.auth_token)
-    self.save
   end
 end
