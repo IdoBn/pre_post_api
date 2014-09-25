@@ -31,4 +31,12 @@ class User < ActiveRecord::Base
       self.auth_token = SecureRandom.hex
     end while self.class.exists?(auth_token: self.auth_token)
   end
+
+  def self.text_search(query)
+  	if query.present?
+  		where("name @@ :q", q: query)
+  	else
+  		scoped
+  	end
+  end
 end

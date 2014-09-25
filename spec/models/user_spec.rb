@@ -25,4 +25,11 @@ RSpec.describe User, :type => :model do
  	it '#set_auth_token' do
  		expect { user.set_auth_token }.to change{ user.auth_token }
  	end
+
+ 	it 'searches for a user' do
+ 		user1 = FactoryGirl.create(:user)
+ 		user2 = FactoryGirl.create(:user2)
+
+ 		expect(User.text_search(user1.name)).to include(user1)
+ 	end
 end

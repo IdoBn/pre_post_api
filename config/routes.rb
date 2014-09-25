@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :users, only: [:create, :show]
+  resources :users, only: [:create, :show, :index]
   resources :sessions, only: [:create, :destroy]
 
   patch 'friendships/accept/:friend_id', to: 'friendships#accept'

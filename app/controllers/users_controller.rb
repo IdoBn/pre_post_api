@@ -15,6 +15,15 @@ class UsersController < ApplicationController
 		render json: { user: @user }
 	end
 
+	def index
+		if params[:query].blank?
+			render json: { errors: ['search query cannot be blank'] }
+		else
+			users = User.text_search(params[:query])
+			render json: { users: users }
+		end
+	end
+
  private
  	def user_params
  		params.require(:user).permit(:email, :password, :password_confirmation, :name)

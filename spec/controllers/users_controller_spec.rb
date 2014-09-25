@@ -2,6 +2,20 @@ require 'rails_helper'
 
 RSpec.describe UsersController, :type => :controller do
 
+	context 'GET index' do
+		let(:user) { FactoryGirl.create(:user) }
+		let(:user2) { FactoryGirl.create(:user2) }
+		before(:each) do
+			allow(controller).to receive(:authenticate_token) { true }
+			allow(controller).to receive(:current_user) { user }
+		end
+
+		it 'responds to search term' do
+			get :index, { query: user2.name }
+			expect(JSON.parse(response.body)['users']).to include(JSON.parse(user2.to_json))
+		end
+	end
+
 	context 'show' do
 		let(:user) { FactoryGirl.create(:user) }
 	  before(:each) do
