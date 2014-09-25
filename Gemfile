@@ -15,6 +15,7 @@ group :development, :test do
 	gem 'ffaker', '~> 1.25.0'
 	gem 'rb-fsevent', :require => false if RUBY_PLATFORM	 =~ /darwin/i
 	gem 'guard-rspec'
+	gem 'shoulda-matchers', '~> 2.7.0', require: false
 end
 
 

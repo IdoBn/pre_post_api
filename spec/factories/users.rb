@@ -5,5 +5,9 @@ FactoryGirl.define do
   factory :user do
     email Faker::Internet.email
     password_digest "$2a$04$exIZAvRl0zC.4w7XTQNUTu8ERZ5qIibamJuqeiCJWMSGCMseHnP3i"
+
+    factory :user2 do
+    	email Faker::Internet.email
+    end
   end
 end

@@ -9,6 +9,14 @@ RSpec.describe User, :type => :model do
  		it { expect(FactoryGirl.build(:user, email: nil)).to_not be_valid }
  		it { expect(FactoryGirl.build(:user, email: user.email)).to_not be_valid	}
  		it { expect(FactoryGirl.build(:user, email: 'dodoAtGmailDotCom')).to_not be_valid }
+
+ 		it { should have_secure_password }
+ 	end
+
+ 	context 'associations' do
+ 		it { should have_many(:friendships) }
+ 		it { should have_many(:friends) }
+ 		it { should have_many(:pending_friends) }
  	end
 
  	it '#set_auth_token' do
