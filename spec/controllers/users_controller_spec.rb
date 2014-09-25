@@ -11,7 +11,7 @@ RSpec.describe UsersController, :type => :controller do
 		end
 
 		it 'responds to search term' do
-			get :index, { query: user2.name }
+			get :index, { query: user2.name, page: 1 }
 			expect(JSON.parse(response.body)['users']).to include(JSON.parse(user2.to_json))
 		end
 	end

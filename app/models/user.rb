@@ -26,6 +26,9 @@ class User < ActiveRecord::Base
 	# callbacks
 	before_create :set_auth_token
 
+	# will paginate
+	self.per_page = 20
+
 	def set_auth_token
     begin
       self.auth_token = SecureRandom.hex

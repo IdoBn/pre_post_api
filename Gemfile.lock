@@ -157,6 +157,7 @@ GEM
       hitimes
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
+    will_paginate (3.0.7)
 
 PLATFORMS
   ruby
@@ -174,3 +175,4 @@ DEPENDENCIES
   rspec-rails (~> 3.1.0)
   shoulda-matchers (~> 2.7.0)
   spring
+  will_paginate (~> 3.0)

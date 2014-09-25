@@ -19,7 +19,7 @@ class UsersController < ApplicationController
 		if params[:query].blank?
 			render json: { errors: ['search query cannot be blank'] }
 		else
-			users = User.text_search(params[:query])
+			users = User.text_search(params[:query]).paginate(page: params[:page])
 			render json: { users: users }
 		end
 	end
