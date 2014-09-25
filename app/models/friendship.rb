@@ -4,6 +4,13 @@ class Friendship < ActiveRecord::Base
 
 	validates :status, format: /pending|requested|accepted|rejected/
 
+	before_destroy :remove_both_sides
+
+	def remove_both_sides
+		self.user.friends.delete(self.friend)
+  	self.friend.friends.delete(self.user)
+	end
+
 	def self.accept_one_side(user_id, friend_id, accepted_at)
 		request = where(user_id: user_id, friend_id: friend_id).first
     request.status = 'accepted'
