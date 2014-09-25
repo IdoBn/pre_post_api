@@ -12,6 +12,6 @@ RSpec.describe User, :type => :model do
  	end
 
  	it '#set_auth_token' do
- 		expect { user.set_auth_token }.to change{ user.auth_token.class }.from(NilClass).to(String)
+ 		expect { user.set_auth_token }.to change{ user.auth_token }
  	end
 end
