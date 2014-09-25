@@ -13,12 +13,11 @@ class SessionsController < ApplicationController
 	end
 
 	def destroy
-		user = User.find(params[:id])
-		user.auth_token = nil
-		if user.save
+		current_user.auth_token = nil
+		if current_user.save
 			render json: { status: 'signed out' }
 		else
-			render json: {errors: @user.errors.full_messages}
+			render json: {errors: current_user.errors.full_messages}
 		end
 	end
 end

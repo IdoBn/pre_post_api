@@ -22,13 +22,29 @@ RSpec.describe SessionsController, :type => :controller do
 	end
 
 	context 'destroy' do
-		# don't know how to test this
-		# it 'removes auth_token' do
-		# 	user.set_auth_token
-		# 	delete :destroy, { id: user.id }, { 'Authorization' => "Token token='#{user.auth_token}'}" }
-		# 	# expect(response).to be_success
-		# 	expect(JSON.parse(response.body)['status']).to be('signed out')
-		# 	# expect(user.auth_token).to be_nil
-		# end
+		context 'success' do
+			before(:each) do
+				user.set_auth_token
+				allow(controller).to receive(:authenticate_token) { true }
+				allow(controller).to receive(:current_user) { user }
+			end
+			# don't know how to test this
+			it 'removes auth_token' do
+				delete :destroy, { id: user.id }, { 'Authorization' => ActionController::HttpAuthentication::Token.encode_credentials(user.auth_token) }
+				expect(user.auth_token).to be_nil
+			end
+
+			it 'returns success' do
+				delete :destroy, { id: user.id }, { 'Authorization' => ActionController::HttpAuthentication::Token.encode_credentials(user.auth_token) }
+				expect(response).to be_success
+			end
+		end
+
+		context 'failure' do
+			it 'returns failure without authorization token' do
+				delete :destroy, { id: user.id }, { 'Authorization' => ActionController::HttpAuthentication::Token.encode_credentials(user.auth_token) }
+				expect(response).to_not be_success
+			end
+		end
 	end
 end
