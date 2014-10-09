@@ -3,10 +3,10 @@ class Post < ActiveRecord::Base
 	has_many :votes
 
 	def votes_yes
-		self.votes.select { |vote| vote.status == 'yes' }
+		self.reload.votes.select { |vote| vote.status == 'yes' }
 	end
 
 	def votes_no
-		self.votes.select { |vote| vote.status == 'no' }
+		self.reload.votes.select { |vote| vote.status == 'no' }
 	end
 end

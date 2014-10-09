@@ -4,6 +4,9 @@ Rails.application.routes.draw do
 
   patch 'friendships/accept/:friend_id', to: 'friendships#accept'
   resources :friendships, only: [:create, :destroy]
+
+  post 'votes/yes', to: 'votes#yes'
+  post 'votes/no', to: 'votes#no'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
