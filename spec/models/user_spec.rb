@@ -54,6 +54,7 @@ RSpec.describe User, :type => :model do
  		it { should have_many(:friends) }
  		it { should have_many(:pending_friends) }
     it { should have_many(:posts) }
+    it { should have_many(:votes) }
  	end
 
  	it '#set_auth_token' do

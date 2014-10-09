@@ -12,6 +12,8 @@ class User < ActiveRecord::Base
 		source: :friend
 
 	has_many :posts
+
+	has_many :votes
 	# validations
 	validates(:email, presence: true,
 										uniqueness: true,
