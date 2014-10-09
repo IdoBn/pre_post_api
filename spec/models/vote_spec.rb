@@ -6,6 +6,16 @@ RSpec.describe Vote, :type => :model do
 		it { expect(FactoryGirl.build(:vote, status: 'no')).to be_valid }
 		it { expect(FactoryGirl.build(:vote, status: 'yes')).to be_valid }
 		it { expect(FactoryGirl.build(:vote, status: 'dodo')).to_not be_valid }
+
+		it 'validates that a user can not have two votes on the same post' do
+			user = FactoryGirl.create(:user)
+			post = FactoryGirl.create(:post, user_id: user.id)
+
+			expect {
+				user.votes.create(post_id: post.id, status: 'yes')
+				user.votes.create(post_id: post.id, status: 'no')  
+			}.to change { post.votes.count }.by 1
+		end
 	end
 
 	context 'associations' do

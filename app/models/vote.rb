@@ -4,6 +4,8 @@ class Vote < ActiveRecord::Base
 	belongs_to :post
 
 	# validations
-	validates :status, presence: true, format: /no|yes/
+	validates :status, presence: true,
+										 format: /no|yes/										 
+	validates_uniqueness_of :user_id, :scope => :post_id
 
 end
