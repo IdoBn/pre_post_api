@@ -4,7 +4,7 @@ class UsersController < ApplicationController
 	def create
 		@user = User.new(user_params)
 		if @user.save
-			render json: { user: @user }
+			render json: @user
 		else
 			render json: {errors: @user.errors.full_messages}
 		end
@@ -12,7 +12,7 @@ class UsersController < ApplicationController
 
 	def show
 		@user = User.find(params[:id])
-		render json: { user: @user }
+		render json: @user
 	end
 
 	def index
@@ -20,7 +20,7 @@ class UsersController < ApplicationController
 			render json: { errors: ['search query cannot be blank'] }
 		else
 			users = User.text_search(params[:query]).paginate(page: params[:page])
-			render json: { users: users }
+			render json: users
 		end
 	end
 

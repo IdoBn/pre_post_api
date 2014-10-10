@@ -12,7 +12,7 @@ RSpec.describe UsersController, :type => :controller do
 
 		it 'responds to search term' do
 			get :index, { query: user2.name, page: 1 }
-			expect(JSON.parse(response.body)['users']).to include(JSON.parse(user2.to_json))
+			expect(JSON.parse(response.body)).to include(JSON.parse(user2.to_json))
 		end
 	end
 
@@ -26,7 +26,7 @@ RSpec.describe UsersController, :type => :controller do
 
 	  it 'renders user json' do
 	  	get :show, { id: user.id }
-	  	expect(JSON.parse(response.body)['user']['email']).to eq(user.email)
+	  	expect(JSON.parse(response.body)['email']).to eq(user.email)
 	  end
 	end
 
@@ -40,7 +40,7 @@ RSpec.describe UsersController, :type => :controller do
 
 		it 'creates a user' do
 			post :create, user_params
-			expect(JSON.parse(response.body)['user']['email']).to eq(user_params[:user][:email])
+			expect(JSON.parse(response.body)['email']).to eq(user_params[:user][:email])
 		end
 
 		it 'should not create user with bad params' do
@@ -51,7 +51,7 @@ RSpec.describe UsersController, :type => :controller do
 
 		it 'should create an auth token' do
 			post :create, user_params
-			expect(JSON.parse(response.body)['user']['auth_token']).to_not be_nil
+			expect(JSON.parse(response.body)['auth_token']).to_not be_nil
 		end
 	end
 
