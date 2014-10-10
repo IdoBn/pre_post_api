@@ -33,4 +33,19 @@ RSpec.describe PostsController, :type => :controller do
 			end
 		end
 	end
+
+	context 'GET #show' do
+		let(:user_post) { user.posts.create }
+		before(:each) { user_post }
+
+		it 'should be success' do
+			get :show, {id: user_post.id}
+			expect(response).to be_success
+		end
+
+		it 'should return the post' do 
+			get :show, { id: user_post.id }
+			expect(JSON.parse(response.body)["user"]).to eq JSON.parse(user_post.to_json)
+		end
+	end
 end
