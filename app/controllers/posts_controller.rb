@@ -1,5 +1,5 @@
 class PostsController < ApplicationController
-	before_action :authenticate
+	# before_action :authenticate
 
 	def index
 		ids = current_user.friends.pluck(:id)
