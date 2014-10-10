@@ -12,7 +12,7 @@ RSpec.describe UsersController, :type => :controller do
 
 		it 'responds to search term' do
 			get :index, { query: user2.name, page: 1 }
-			expect(JSON.parse(response.body)).to include(JSON.parse(user2.to_json))
+			expect(JSON.parse(response.body)).to include(JSON.parse(UserSerializer.new(user2).to_json))
 		end
 	end
 
@@ -26,7 +26,9 @@ RSpec.describe UsersController, :type => :controller do
 
 	  it 'renders user json' do
 	  	get :show, { id: user.id }
-	  	expect(JSON.parse(response.body)['email']).to eq(user.email)
+	  	body = JSON.parse(response.body)['user']
+	  	expect(body['email']).to eq(user.email)
+	  	expect(body['name']).to eq(user.name)
 	  end
 	end
 

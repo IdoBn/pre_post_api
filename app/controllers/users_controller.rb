@@ -12,7 +12,7 @@ class UsersController < ApplicationController
 
 	def show
 		@user = User.find(params[:id])
-		render json: @user, serializer: UserSerializer
+		render json: UserSerializer.new(@user).to_json
 	end
 
 	def index
@@ -20,7 +20,7 @@ class UsersController < ApplicationController
 			render json: { errors: ['search query cannot be blank'] }
 		else
 			users = User.text_search(params[:query]).paginate(page: params[:page])
-			render json: users, serializer: UserSerializer
+			render json: users.map{|u| UserSerializer.new(u)}.to_json
 		end
 	end
 
