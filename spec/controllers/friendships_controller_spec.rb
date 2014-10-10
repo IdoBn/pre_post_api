@@ -4,7 +4,6 @@ RSpec.describe FriendshipsController, :type => :controller do
   let(:user) { FactoryGirl.create(:user) }
   let(:user2) { FactoryGirl.create(:user2) }
   before(:each) do
-    user.set_auth_token
     allow(controller).to receive(:authenticate_token) { true }
     allow(controller).to receive(:current_user) { user }
   end

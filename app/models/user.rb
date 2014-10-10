@@ -35,6 +35,14 @@ class User < ActiveRecord::Base
 	# will paginate
 	self.per_page = 20
 
+	# def has_voted
+	
+	# end
+
+	# def has_not_voted
+
+	# end
+
 	def set_auth_token
     begin
       self.auth_token = SecureRandom.hex
