@@ -1,4 +1,6 @@
 class VotesController < ApplicationController
+	before_action :authenticate
+	
 	def yes
 		@vote = Vote.new(post_id: params[:post_id], status: 'yes', user_id: current_user.id)
 		render_vote(@vote.save)
