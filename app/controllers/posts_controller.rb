@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
 	before_action :authenticate
-	
+
 	def index
 		ids = current_user.friends.pluck(:id)
 		@posts = Post.where(user_id: ids).order("created_at DESC").paginate(page: params[:page])
@@ -9,6 +9,6 @@ class PostsController < ApplicationController
 
 	def show
 		@post = Post.find(params[:id])
-		render json: { user: @post }
+		render json: { post: @post }
 	end
 end
