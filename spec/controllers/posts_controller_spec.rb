@@ -29,7 +29,7 @@ RSpec.describe PostsController, :type => :controller do
 			posts << user3.posts.create
 			get :index
 			posts.each do |post|
-				expect(JSON.parse(response.body)['posts']).to include JSON.parse(post.to_json)
+				expect(JSON.parse(response.body)).to include JSON.parse(post.to_json)
 			end
 		end
 	end
@@ -45,7 +45,13 @@ RSpec.describe PostsController, :type => :controller do
 
 		it 'should return the post' do 
 			get :show, { id: user_post.id }
-			expect(JSON.parse(response.body)["post"]).to eq JSON.parse(user_post.to_json)
+			expect(JSON.parse(response.body)).to eq JSON.parse(user_post.to_json)
 		end
-	end
+
+		it 'includes the user' do
+			get :show, { id: user_post.id }
+			puts JSON.parse(response.body)
+			# expect()
+		end
+ 	end
 end

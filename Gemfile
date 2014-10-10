@@ -10,7 +10,7 @@ gem 'pg'
 
 gem 'will_paginate', '~> 3.0'
 
-gem 'active_model_serializers', '~> 0.9.0'
+gem 'active_model_serializers'
 
 group :development, :test do
 	gem 'rspec-rails', '~> 3.1.0'
