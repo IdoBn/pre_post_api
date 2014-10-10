@@ -30,9 +30,10 @@ RSpec.describe PostsController, :type => :controller do
 			get :index
 			posts.each do |post|
 				body = JSON.parse(response.body)
-				expect(body.map { |p| post.id }).to include post.id
-				expect(body.map { |p| post.image_url }).to include post.image_url
-				expect(body.map { |p| post.user.id }).to include post.user.id
+				expect(body.map { |p| p['post']['id'] }).to include post.id
+				expect(body.map { |p| p['post']['image_url'] }).to include post.image_url
+				expect(body.map { |p| p['post']['user']['id'] }).to include post.user.id
+				# expect(body.map { |p| p.user.id }).to include post.user.id
 			end
 		end
 	end
