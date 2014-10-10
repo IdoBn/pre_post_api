@@ -42,7 +42,7 @@ RSpec.describe UsersController, :type => :controller do
 
 		it 'creates a user' do
 			post :create, user_params
-			expect(JSON.parse(response.body)['email']).to eq(user_params[:user][:email])
+			expect(JSON.parse(response.body)["user"]['email']).to eq(user_params[:user][:email])
 		end
 
 		it 'should not create user with bad params' do
@@ -53,7 +53,13 @@ RSpec.describe UsersController, :type => :controller do
 
 		it 'should create an auth token' do
 			post :create, user_params
-			expect(JSON.parse(response.body)['auth_token']).to_not be_nil
+			expect(JSON.parse(response.body)["user"]['auth_token']).to_not be_nil
+		end
+
+		it 'should not include password_digest' do
+			post :create, user_params
+			expect(JSON.parse(response.body)["user"]['password_digest']).to be_nil
+			# expect(JSON.parse(response.body["user"]["password_digest"])).to_not be_defined
 		end
 	end
 

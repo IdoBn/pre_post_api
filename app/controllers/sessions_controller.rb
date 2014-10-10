@@ -6,7 +6,7 @@ class SessionsController < ApplicationController
 		if user && user.authenticate(params[:password])
 			user.set_auth_token
 			user.save
-			render :json => { user: user.as_json(only: [:id, :name, :auth_token, :email]) } 
+			render json: AuthUserSerializer.new(user).to_json
 		else
 			render_unauthorized
 		end
