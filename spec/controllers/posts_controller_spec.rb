@@ -45,7 +45,7 @@ RSpec.describe PostsController, :type => :controller do
 
 		it 'should return the post' do 
 			get :show, { id: user_post.id }
-			expect(JSON.parse(response.body)["user"]).to eq JSON.parse(user_post.to_json)
+			expect(JSON.parse(response.body)["post"]).to eq JSON.parse(user_post.to_json)
 		end
 	end
 end
