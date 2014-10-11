@@ -1,6 +1,11 @@
 class FriendshipsController < ApplicationController
 	before_action :authenticate
 
+  def index
+    users = current_user.friends
+    render json: users.map{|u| UserSerializer.new(u)}.to_json
+  end
+
   def create
   	@friendship = Friendship.request(current_user.id, params[:friend_id])
   	if @friendship.save

@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   resources :sessions, only: [:create, :destroy]
 
   patch 'friendships/accept/:friend_id', to: 'friendships#accept'
-  resources :friendships, only: [:create, :destroy]
+  resources :friendships, only: [:create, :destroy, :index]
 
   post 'votes/yes', to: 'votes#yes'
   post 'votes/no', to: 'votes#no'

@@ -16,6 +16,30 @@ RSpec.describe FriendshipsController, :type => :controller do
     end
   end
 
+  describe "GET index" do
+    let(:user3) { FactoryGirl.create(:user2, name: 'dodo', email: 'dodo@email.com') }
+    before :each do
+      Friendship.request(user.id, user2.id)
+      Friendship.accept(user2.id, user.id)
+
+      Friendship.request(user.id, user3.id)
+      Friendship.accept(user3.id, user.id)    
+    end
+
+    it 'responds with success' do
+      get :index
+      expect(response).to be_success
+    end
+
+    it 'returns a list of friends' do
+      get :index
+      body = JSON.parse(response.body)
+      expect(body.map { |f| f['user']['name'] }).to match_array user.friends.map { |u| u.name }
+      expect(body.map { |f| f['user']['email'] }).to match_array user.friends.map { |u| u.email }
+      expect(body.map { |f| f['user']['id'] }).to match_array user.friends.map { |u| u.id } 
+    end
+  end
+
   describe "DELETE destroy" do
     it "it destroys friend request" do
       Friendship.request(user.id, user2.id)
